@@ -1,0 +1,14 @@
+Interpretation of empirical results:
+
+Theoretical expectations:
+- Insertion Sort: O(n^2) — time grows quadratically with n.
+- Merge Sort: O(n log n) — time grows roughly like n log n.
+
+Observed behaviour:
+- n=1000: Insertion 0.051425s, Merge 0.005922s
+- n=5000: Insertion 1.024555s, Merge 0.034954s
+- n=10000: Insertion 3.461225s, Merge 0.055112s
+- n=50000: Insertion Sort skipped (impractical), Merge Sort time 0.275320s
+
+Conclusion:
+Merge Sort scales far better than Insertion Sort for larger n; the empirical results match theoretical expectations. Any deviations (small constant-factor differences) are likely due to Python interpreter overhead, memory allocation, and the particular random data distributions used.

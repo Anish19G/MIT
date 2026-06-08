@@ -1,0 +1,2 @@
+1,P001,Laptop,50
+P001,mouse,electronics,20
