@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block content %}
+  <div class="card shadow-sm">
+    <div class="card-body">
+      <h3 class="card-title">Transaction Result</h3>
+      <p>Method: <strong>{{method}}</strong></p>
+      {% if fraud %}
+        <div class="alert alert-danger">Transaction flagged as fraudulent.<br>Reason: {{reason}}</div>
+      {% else %}
+        <div class="alert alert-success">Transaction approved.<br>Reason: {{reason}}</div>
+      {% endif %}
+      <a class="btn btn-secondary" href="{{ url_for('dashboard') }}">Back to dashboard</a>
+    </div>
+  </div>
+{% endblock %}

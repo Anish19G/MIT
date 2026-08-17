@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block content %}
+  <div class="card p-4 form-center text-center">
+    <h3 class="mb-2">Transaction Result</h3>
+    <p class="mb-1">Transaction ID: <strong>#{{ tx.id }}</strong></p>
+    <p>Status: <span class="badge bg-{{ 'success' if tx.status=='approved' else 'danger' }} status-badge">{{ tx.status }}</span></p>
+    {% if result %}
+      <div class="mt-3 text-start w-100">
+        <h5>BLA Breakdown</h5>
+        <ul>
+          <li>Composite: {{ result.composite_score }}</li>
+          <li>Threshold: {{ result.threshold }}</li>
+          <li>Amount score: {{ result.factors.amount_score }}</li>
+          <li>Location score: {{ result.factors.location_score }}</li>
+          <li>Velocity score: {{ result.factors.velocity_score }}</li>
+          <li>Time score: {{ result.factors.time_score }}</li>
+        </ul>
+      </div>
+    {% endif %}
+    <div class="mt-3">
+      <a class="btn btn-secondary" href="{{ url_for('dashboard') }}">Back to dashboard</a>
+    </div>
+  </div>
+{% endblock %}

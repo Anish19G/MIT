@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% block content %}
+  <div class="card form-center p-4">
+    <h3 class="mb-3">Create account</h3>
+    <form method="post">
+      <div class="mb-3">
+        <label class="form-label">Username</label>
+        <input class="form-control" name="username" required>
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Email</label>
+        <input type="email" class="form-control" name="email" required>
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Password</label>
+        <input type="password" class="form-control" name="password" required>
+      </div>
+      <div class="row">
+        <div class="col-md-6 mb-3">
+          <label class="form-label">Home City</label>
+          <input class="form-control" name="home_city" value="Sydney">
+        </div>
+        <div class="col-md-6 mb-3">
+          <label class="form-label">Home Country</label>
+          <input class="form-control" name="home_country" value="Australia">
+        </div>
+      </div>
+      <button class="btn btn-primary" type="submit">Create account</button>
+    </form>
+  </div>
+{% endblock %}

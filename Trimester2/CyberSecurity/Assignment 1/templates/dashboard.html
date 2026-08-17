@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Dashboard</title>
+    <style>
+      body { font-family: Arial, sans-serif; margin: 0; background: #f8fafc; color: #0f172a; }
+      .container { max-width: 1200px; margin: 0 auto; padding: 24px; }
+      .card { background: white; border: 1px solid #cbd5e1; border-radius: 12px; padding: 20px; margin-bottom: 18px; box-shadow: 0 1px 3px rgba(0,0,0,0.08); }
+      .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 16px; }
+      form { display: flex; flex-direction: column; gap: 10px; }
+      input, select, button { padding: 10px; border-radius: 8px; border: 1px solid #94a3b8; }
+      button { background: #2563eb; color: white; cursor: pointer; }
+      ul { padding-left: 18px; }
+      .flash { background: #dbeafe; padding: 10px; border-radius: 8px; margin: 12px 0; }
+      .pill { display: inline-block; background: #e2e8f0; border-radius: 999px; padding: 6px 10px; margin: 4px 0; }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="card">
+        <h1>Security Dashboard</h1>
+        <p>Welcome, {{ username }}.</p>
+        <p><strong>Total asset value:</strong> ${{ total_value }}</p>
+        <a href="/logout">Logout</a>
+      </div>
+
+      {% with messages = get_flashed_messages() %}
+        {% if messages %}
+          {% for message in messages %}
+            <div class="flash">{{ message }}</div>
+          {% endfor %}
+        {% endif %}
+      {% endwith %}
+
+      <div class="grid">
+        <div class="card">
+          <h2>Add Asset</h2>
+          <form action="/assets" method="post">
+            <input name="name" placeholder="Asset Name" required>
+            <input name="asset_type" placeholder="Asset Type" required>
+            <input name="owner" placeholder="Owner" required>
+            <input name="value" type="number" step="0.01" placeholder="Value" required>
+            <input name="description" placeholder="Description">
+            <button type="submit">Add Asset</button>
+          </form>
+          <h3>Assets</h3>
+          <ul>
+            {% for asset in assets %}
+              <li><strong>Asset ID {{ asset.id }}</strong> - {{ asset.name }} ({{ asset.asset_type }}) - Owner: {{ asset.owner }} - Value: ${{ asset.value }}</li>
+            {% endfor %}
+          </ul>
+        </div>
+
+        <div class="card">
+          <h2>Record Risk</h2>
+          <form action="/risks" method="post">
+            <input name="asset_id" placeholder="Asset ID" required>
+            <input name="threat" placeholder="Threat" required>
+            <input name="vulnerability" placeholder="Vulnerability" required>
+            <input name="impact" type="number" step="0.1" placeholder="Impact" required>
+            <select name="strategy">
+              <option value="accept">Accept</option>
+              <option value="mitigate">Mitigate</option>
+              <option value="transfer">Transfer</option>
+              <option value="avoid">Avoid</option>
+            </select>
+            <button type="submit">Record Risk</button>
+          </form>
+          <h3>Risks</h3>
+          <ul>
+            {% for risk in risks %}
+              <li>
+                <strong>{{ risk.threat }}</strong> | Vulnerability: {{ risk.vulnerability }} |
+                Impact: {{ risk.impact }} | Strategy: {{ risk.strategy }} |
+                Risk Score: {{ risk.risk_score }} | ALE: {{ risk.ale }}
+              </li>
+            {% endfor %}
+          </ul>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>Compliance Alignment</h2>
+        <p>This solution supports ISO 27001-style controls by protecting assets, documenting risk treatment, and monitoring suspicious activity.</p>
+        <div class="pill">Asset protection</div>
+        <div class="pill">Risk treatment</div>
+        <div class="pill">Access control</div>
+      </div>
+    </div>
+  </body>
+</html>

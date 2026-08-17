@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% block content %}
+  <div class="card p-4 form-center">
+    <h3 class="mb-3">New Transaction</h3>
+    <form method="post">
+      <div class="mb-3">
+        <label class="form-label">Amount</label>
+        <input type="number" step="0.01" class="form-control" name="amount" required>
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Merchant</label>
+        <input class="form-control" name="merchant" required>
+      </div>
+      <div class="row">
+        <div class="col-md-6 mb-3">
+          <label class="form-label">City</label>
+          <input class="form-control" name="location_city" required>
+        </div>
+        <div class="col-md-6 mb-3">
+          <label class="form-label">Country</label>
+          <input class="form-control" name="location_country" required>
+        </div>
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Detection Method</label>
+        <select class="form-select" name="detection_method">
+          <option value="BLA">BLA</option>
+          <option value="OTP">OTP</option>
+        </select>
+      </div>
+      <div class="d-flex justify-content-end">
+        <button class="btn btn-primary" type="submit">Submit</button>
+      </div>
+    </form>
+  </div>
+{% endblock %}
